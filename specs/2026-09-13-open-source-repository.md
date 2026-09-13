@@ -1,6 +1,6 @@
 # Topic Hunter 公开源码仓库规格
 
-- 状态：有效，实施中。
+- 状态：有效，OSS-01 至 OSS-05 已验收；后续产品验收仍见阶段计划。
 - 范围：在 `WaterDJiang/topic-hunter` 建立公开 GitHub 源码仓库，推送当前开发预览版、仓库文档与品牌资产；不提交 Chrome Web Store，不宣称真实 X 或选题效果验收完成。
 - 依据：用户明确要求新开开源仓库、建立推送、补齐忽略文件、README、版本和 Logo。
 
