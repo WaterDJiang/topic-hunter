@@ -33,6 +33,7 @@ test('built extension supports local quick draft and topic paths at 360px', asyn
       await chrome.runtime.sendMessage({ type: 'importBackup', data: { posts: [item], observations: [{ id: 'obs-1', postId: item.id, observedAt: item.lastSeenAt, source: 'graphql', metrics: item.latestMetrics }], quickDrafts: [], topicCards: [] } });
     }, post);
     await expect(page.getByText('一个能引发讨论的简短观点。')).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await page.screenshot({ path: 'output/playwright/sidepanel-discover.png', fullPage: true });
     await page.getByRole('button', { name: '快速改写' }).click();
     await expect(page.getByText('让好素材，变成你的表达.')).toBeVisible();
@@ -64,7 +65,7 @@ test('built extension supports local quick draft and topic paths at 360px', asyn
     const xPage = await context.newPage();
     let graphqlRequests = 0;
     let graphqlText = '页面响应中的完整帖子';
-    await xPage.route('https://x.com/test', route => route.fulfill({ contentType: 'text/html', body: '<html><body><article data-testid="tweet"><a href="/sample/status/323456789012345678"><time datetime="2026-09-13T08:00:00Z">今天</time></a><div data-testid="tweetText">页面可见的帖子</div><div role="group"></div></article></body></html>' }));
+    await xPage.route('https://x.com/test', route => route.fulfill({ contentType: 'text/html; charset=utf-8', body: `<html><body><article data-testid="tweet"><a href="/sample/status/323456789012345678"><time datetime="${new Date().toISOString()}">今天</time></a><div data-testid="tweetText">页面可见的帖子</div><div role="group"><button data-testid="reply" aria-label="42 Replies. Reply">42</button><button data-testid="retweet" aria-label="4 reposts. Repost">4</button><button data-testid="like" aria-label="160 Likes. Like">160</button><a href="/sample/status/323456789012345678/analytics" aria-label="12000 views. View post analytics">12K</a><button data-testid="bookmark" aria-label="Bookmark">2</button></div></article></body></html>` }));
     await xPage.route('https://x.com/i/api/graphql/**', route => {
       graphqlRequests += 1;
       return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ data: { tweet: {
@@ -76,6 +77,15 @@ test('built extension supports local quick draft and topic paths at 360px', asyn
     });
     await xPage.goto('https://x.com/test');
     await expect(xPage.locator('[data-topic-hunter-badge]')).toBeVisible();
+    await expect.poll(async () => {
+      const snapshot = await workspace.evaluate(async () => chrome.runtime.sendMessage({ type: 'snapshot' }));
+      return snapshot.data.posts.find((item: { id: string }) => item.id === '323456789012345678');
+    }).toMatchObject({
+      isComplete: true,
+      latestMetricSource: 'dom',
+      latestMetrics: { views: 12000, likes: 160, replies: 42, reposts: 4, bookmarks: 2, followers: null },
+    });
+    await expect(workspace.getByRole('region', { name: '素材列表' }).getByText('页面可见的帖子')).toBeVisible();
     await xPage.evaluate(() => fetch('/i/api/graphql/abc/TweetDetail').then(response => response.json()));
     await expect(workspace.getByRole('region', { name: '素材列表' }).getByText('页面响应中的完整帖子')).toBeVisible();
     expect(graphqlRequests).toBe(1);
@@ -114,6 +124,18 @@ test('built extension supports local quick draft and topic paths at 360px', asyn
     expect(afterSecondTab.data.observations.filter((item: { postId: string }) => item.postId === '323456789012345678').length).toBeGreaterThanOrEqual(2);
     expect(secondTabRequests).toBe(1);
 
+    const truncatedTab = await context.newPage();
+    await truncatedTab.route('https://x.com/test', route => route.fulfill({
+      contentType: 'text/html; charset=utf-8',
+      body: `<html><body><article data-testid="tweet"><a href="/sample/status/423456789012345678"><time datetime="${new Date().toISOString()}">今天</time></a><div data-testid="tweetText">可见但截断的长帖开头</div><button>Show more</button><div role="group"><button data-testid="like" aria-label="160 Likes. Like">160</button><a href="/sample/status/423456789012345678/analytics" aria-label="12000 views. View post analytics">12K</a></div></article></body></html>`,
+    }));
+    await truncatedTab.goto('https://x.com/test');
+    await expect.poll(async () => {
+      const snapshot = await workspace.evaluate(async () => chrome.runtime.sendMessage({ type: 'snapshot' }));
+      return snapshot.data.posts.find((item: { id: string }) => item.id === '423456789012345678');
+    }).toMatchObject({ isComplete: false, latestMetrics: { views: 12000, likes: 160, followers: null } });
+    await expect(workspace.getByRole('region', { name: '素材列表' }).getByText('可见但截断的长帖开头')).toHaveCount(0);
+
     await workspace.evaluate(async () => {
       const timestamp = new Date().toISOString();
       const posts = Array.from({ length: 1_000 }, (_, index) => {
@@ -127,7 +149,8 @@ test('built extension supports local quick draft and topic paths at 360px', asyn
       });
       await chrome.runtime.sendMessage({ type: 'importBackup', data: { posts, observations: [], quickDrafts: [], topicCards: [] } });
     });
-    await expect(workspace.getByText('1002 条')).toBeVisible();
+    await expect(workspace.getByText('1002 条命中', { exact: true })).toBeVisible();
+    await expect(workspace.getByText('已捕获 1003 条 · 当前预设命中 1002 条', { exact: true })).toBeVisible();
     expect(await workspace.locator('article').count()).toBeLessThan(30);
   } finally {
     await context.close();

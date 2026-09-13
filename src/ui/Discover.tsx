@@ -96,8 +96,9 @@ export function Discover({ snapshot, compact, selected, onSelected, onQuick, onD
     <section className={styles.discoverList} aria-label="素材列表">
       <div className={styles.sectionLead}>
         <div><span className={styles.eyebrow}>SIGNAL / 01</span><h2>发现值得写的瞬间<span className={styles.titlePoint}>.</span></h2></div>
-        <span className={styles.countPill}>{filtered.length} 条</span>
+        <span className={styles.countPill}>{filtered.length} 条命中</span>
       </div>
+      <p className={styles.captureSummary}>已捕获 {snapshot.posts.length} 条 · 当前预设命中 {filtered.length} 条</p>
       <fieldset className={styles.filterBar}><legend className={styles.srOnly}>筛选预设</legend>
         <button type="button" className={preset === 'high-interaction' ? styles.filterActive : styles.filterButton} onClick={() => changeFilter(() => setPreset('high-interaction'))}>高互动</button>
         <button type="button" className={preset === 'small-account' ? styles.filterActive : styles.filterButton} onClick={() => changeFilter(() => setPreset('small-account'))}>小号发现</button>
@@ -115,7 +116,8 @@ export function Discover({ snapshot, compact, selected, onSelected, onQuick, onD
         {filtered.length === 0 ? <div className={styles.emptyState}>
           <div className={styles.emptySymbol}>✳</div>
           <h3>{snapshot.posts.length === 0 ? '还没有捕获素材' : '当前筛选没有命中'}</h3>
-          <p>{snapshot.posts.length === 0 ? '打开 X 浏览首页、搜索、列表、主页或帖子详情。插件只观察已加载的内容。' : '试试“全部”或调整设置中的阈值。'}</p>
+          <p>{snapshot.posts.length === 0 ? '打开或刷新 X 页面后浏览首页、搜索、列表、主页或帖子详情。插件只观察已加载的内容。' : `已捕获 ${snapshot.posts.length} 条；当前预设没有命中。可查看全部，或调整设置中的阈值。`}</p>
+          {snapshot.posts.length > 0 && <button type="button" className={styles.outlineButton} onClick={() => changeFilter(() => setPreset('all'))}>查看全部 {snapshot.posts.length} 条素材</button>}
         </div> : <div className={styles.virtualCanvas} style={{ height: virtualizer.getTotalSize() }}>
           {virtualizer.getVirtualItems().map(row => {
             const post = filtered[row.index];

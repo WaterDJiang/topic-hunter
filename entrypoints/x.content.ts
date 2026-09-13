@@ -25,6 +25,17 @@ function statusId(article: Element): string | null {
 function domFallback(article: Element, id: string): CapturedPost | null {
   const text = article.querySelector('[data-testid="tweetText"]')?.textContent?.trim();
   if (!text) return null;
+  const visibleCount = (selector: string): number | null => {
+    const element = article.querySelector(selector);
+    const label = element?.getAttribute('aria-label')?.match(/^\s*(\d[\d,]*)(?=\s|$)/)?.[1];
+    const raw = label ?? element?.textContent?.trim();
+    if (!raw || !/^\d[\d,]*$/.test(raw)) return null;
+    const value = Number(raw.replaceAll(',', ''));
+    return Number.isSafeInteger(value) ? value : null;
+  };
+  const truncated = [...article.querySelectorAll('button,[role="button"],a')].some(element =>
+    /^(show more|显示更多|展开)$/i.test(element.textContent?.trim() ?? ''),
+  ) || /(?:…|\.\.\.)$/.test(text);
   const link = article.querySelector<HTMLAnchorElement>(`a[href*="/status/${id}"]`);
   const segment = link?.getAttribute('href')?.split('/')[1] ?? null;
   const handle = segment === 'i' ? null : segment;
@@ -32,8 +43,15 @@ function domFallback(article: Element, id: string): CapturedPost | null {
   return {
     id, url: `https://x.com/${handle ?? 'i/web'}/status/${id}`, text,
     authorId: null, authorHandle: handle, publishedAt: time,
-    isComplete: false, quotedPostId: null, language: null,
-    metrics: { ...EMPTY_METRICS }, source: 'dom',
+    isComplete: !truncated, quotedPostId: null, language: null,
+    metrics: {
+      ...EMPTY_METRICS,
+      views: visibleCount('a[href*="/analytics"]'),
+      likes: visibleCount('[data-testid="like"],[data-testid="unlike"]'),
+      replies: visibleCount('[data-testid="reply"]'),
+      reposts: visibleCount('[data-testid="retweet"]'),
+      bookmarks: visibleCount('[data-testid="bookmark"],[data-testid="removeBookmark"]'),
+    }, source: 'dom',
   };
 }
 
