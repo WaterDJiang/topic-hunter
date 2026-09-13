@@ -1,0 +1,12 @@
+node_modules/
+.pnpm-store/
+output/playwright/
+test-results/
+.output/
+dist/
+coverage/
+.wxt/
+.env
+.env.*
+!.env.example
+.DS_Store
