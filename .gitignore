@@ -7,6 +7,7 @@ test-results/
 playwright-report/
 blob-report/
 .output/
+Topic-Hunter-本地测试版/
 dist/
 coverage/
 .nyc_output/
