@@ -57,7 +57,7 @@ export function App({ compact }: { compact: boolean }) {
 
   return <div className={`${styles.shell} ${compact ? styles.compact : styles.wide}`} data-theme={theme}>
     {!compact && <nav className={styles.rail} aria-label="主导航">
-      <div className={styles.brand}><span className={styles.brandMark}>T<span>/</span>H</span><div><strong>Topic Hunter</strong><small>发现值得表达的角度</small></div></div>
+      <div className={styles.brand}><img className={styles.brandMark} src="/icon-48.png" alt="" /><div><strong>Topic Hunter</strong><small>发现值得表达的角度</small></div></div>
       <div className={styles.railDivider} />
       <span className={styles.railLabel}>WORKSPACE</span>
       {nav.map(item => <button type="button" key={item.view} className={`${styles.railItem} ${view === item.view ? styles.railActive : ''}`} onClick={() => setView(item.view)}><item.icon size={18} /> {item.label}</button>)}
@@ -65,7 +65,7 @@ export function App({ compact }: { compact: boolean }) {
     </nav>}
     <div className={styles.mainArea}>
       <header className={styles.topBar}>
-        {compact ? <div className={styles.brandCompact}><span className={styles.brandMark}>T<span>/</span>H</span><strong>Topic Hunter</strong></div> : <span className={styles.breadcrumb}>工作台 <span>/</span> {view === 'quick' ? '快速改写' : nav.find(item => item.view === view)?.label}</span>}
+        {compact ? <div className={styles.brandCompact}><img className={styles.brandMark} src="/icon-48.png" alt="" /><strong>Topic Hunter</strong></div> : <span className={styles.breadcrumb}>工作台 <span>/</span> {view === 'quick' ? '快速改写' : nav.find(item => item.view === view)?.label}</span>}
         <div className={styles.topActions}>
           <span className={`${styles.captureState} ${snapshot?.settings.captureEnabled ? '' : styles.paused}`}><span className={styles.statusPulse} />{snapshot?.settings.captureEnabled ? '正在捕获' : '已暂停'}</span>
           <button type="button" className={styles.iconButton} onClick={() => void toggleCapture()} title={snapshot?.settings.captureEnabled ? '暂停采集' : '恢复采集'} aria-label={snapshot?.settings.captureEnabled ? '暂停采集' : '恢复采集'}>{snapshot?.settings.captureEnabled ? <Pause size={16} /> : <Play size={16} />}</button>

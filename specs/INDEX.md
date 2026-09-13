@@ -5,3 +5,4 @@
 | 功能域 | 状态 | 一句话定义 | 文件 |
 |---|---|---|---|
 | Topic Hunter v1 | 有效，实施中 | 随浏览捕获短内容，快速改写复制或深挖可追溯选题 | [2026-09-13-topic-hunter-v1.md](2026-09-13-topic-hunter-v1.md) |
+| 公开源码仓库 | 有效，实施中 | 建立公开 GitHub 仓库、推送开发预览版与 Logo 资产 | [2026-09-13-open-source-repository.md](2026-09-13-open-source-repository.md) |

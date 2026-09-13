@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title">
+  <title id="title">Topic Hunter 项目社交预览</title>
+  <rect width="1280" height="640" fill="#F5F7FB"/>
+  <path d="M0 0h1280v11H0z" fill="#315CF5"/>
+  <g opacity=".26" fill="#315CF5">
+    <circle cx="76" cy="67" r="2"/><circle cx="110" cy="67" r="2"/><circle cx="144" cy="67" r="2"/>
+    <circle cx="76" cy="101" r="2"/><circle cx="110" cy="101" r="2"/><circle cx="144" cy="101" r="2"/>
+    <circle cx="76" cy="135" r="2"/><circle cx="110" cy="135" r="2"/><circle cx="144" cy="135" r="2"/>
+  </g>
+  <g transform="translate(96 99)">
+    <path d="M42 17H20a8 8 0 0 0-8 8v21h12V29h18V17Zm44 0h22a8 8 0 0 1 8 8v21h-12V29H86V17ZM12 82v21a8 8 0 0 0 8 8h22V99H24V82H12Zm104 0v21a8 8 0 0 1-8 8H86V99h18V82h12Z" fill="#315CF5"/>
+    <rect x="29" y="39" width="58" height="8" rx="4" fill="#9AA8BB"/>
+    <rect x="24" y="54" width="80" height="25" rx="5" fill="#D7FB70"/>
+    <rect x="32" y="63" width="58" height="7" rx="3.5" fill="#172036"/>
+    <rect x="29" y="87" width="54" height="8" rx="4" fill="#9AA8BB"/>
+    <path d="m96 72 2 24 6-9 10 5 3-6-10-5 9-6-20-3Z" fill="#172036" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+  <text x="96" y="322" fill="#172036" font-family="Avenir Next, Inter, Helvetica Neue, sans-serif" font-size="82" font-weight="800" letter-spacing="-4">Topic</text>
+  <text x="312" y="322" fill="#315CF5" font-family="Avenir Next, Inter, Helvetica Neue, sans-serif" font-size="82" font-weight="800" letter-spacing="-4">Hunter</text>
+  <text x="101" y="379" fill="#315CF5" font-family="Avenir Next, Helvetica Neue, sans-serif" font-size="24" font-weight="700" letter-spacing="5">FIND THE SIGNAL</text>
+  <text x="100" y="439" fill="#526071" font-family="Avenir Next, Helvetica Neue, sans-serif" font-size="26">从已读的 X 内容里，找到你的下一个表达角度。</text>
+  <path d="M100 492h455" stroke="#DDE3EC" stroke-width="2"/>
+  <text x="100" y="537" fill="#526071" font-family="Avenir Next, Helvetica Neue, sans-serif" font-size="18" letter-spacing="2">CAPTURE  /  REWRITE  /  EXPLORE</text>
+  <g transform="translate(736 93)">
+    <rect x="27" y="35" width="415" height="474" rx="17" fill="#DDE3EC"/>
+    <rect width="415" height="474" rx="17" fill="#fff" stroke="#DDE3EC" stroke-width="2"/>
+    <rect width="415" height="10" rx="5" fill="#315CF5"/>
+    <text x="31" y="65" fill="#315CF5" font-family="Avenir Next, Helvetica Neue, sans-serif" font-size="14" font-weight="700" letter-spacing="3">SIGNAL / 01</text>
+    <text x="31" y="116" fill="#182230" font-family="Iowan Old Style, Georgia, serif" font-size="34" font-weight="700">值得写的瞬间</text>
+    <rect x="31" y="145" width="353" height="120" rx="12" fill="#F5F7FB"/>
+    <path d="M52 172h219M52 242h258" stroke="#526071" stroke-opacity=".36" stroke-width="9" stroke-linecap="round"/>
+    <rect x="45" y="184" width="328" height="25" rx="5" fill="#D7FB70"/>
+    <path d="M52 196h278" stroke="#172036" stroke-width="8" stroke-linecap="round"/>
+    <rect x="31" y="291" width="106" height="38" rx="5" fill="#D7FB70"/>
+    <text x="46" y="317" fill="#233011" font-family="Avenir Next, Helvetica Neue, sans-serif" font-size="16" font-weight="700">1 条素材</text>
+    <path d="M31 364h353" stroke="#DDE3EC" stroke-width="2"/>
+    <text x="31" y="400" fill="#526071" font-family="Avenir Next, Helvetica Neue, sans-serif" font-size="17">快速改写</text>
+    <path d="M156 389h39" stroke="#315CF5" stroke-width="3" stroke-linecap="round"/>
+    <text x="209" y="400" fill="#526071" font-family="Avenir Next, Helvetica Neue, sans-serif" font-size="17">深挖选题</text>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Topic Hunter 选中短句标识</title>
+  <path d="M42 17H20a8 8 0 0 0-8 8v21h12V29h18V17Zm44 0h22a8 8 0 0 1 8 8v21h-12V29H86V17ZM12 82v21a8 8 0 0 0 8 8h22V99H24V82H12Zm104 0v21a8 8 0 0 1-8 8H86V99h18V82h12Z" fill="#315CF5"/>
+  <rect x="29" y="39" width="58" height="8" rx="4" fill="#9AA8BB"/>
+  <rect x="24" y="54" width="80" height="25" rx="5" fill="#D7FB70"/>
+  <rect x="32" y="63" width="58" height="7" rx="3.5" fill="#172036"/>
+  <rect x="29" y="87" width="54" height="8" rx="4" fill="#9AA8BB"/>
+  <path d="m96 72 2 24 6-9 10 5 3-6-10-5 9-6-20-3Z" fill="#172036" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+</svg>

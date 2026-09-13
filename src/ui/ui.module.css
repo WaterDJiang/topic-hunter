@@ -36,8 +36,7 @@
 .compact { min-width: 0; }
 .rail { width: 216px; flex: none; display: flex; flex-direction: column; padding: 28px 16px 19px; border-right: 1px solid var(--border); background: var(--surface-panel); }
 .brand, .brandCompact { display: flex; align-items: center; gap: 11px; }
-.brandMark { display: inline-grid; place-items: center; width: 39px; height: 39px; flex: none; background: var(--accent); color: #fff; border-radius: 10px 3px 10px 3px; font: 800 14px/1 "Avenir Next", sans-serif; letter-spacing: -.09em; box-shadow: 3px 3px 0 var(--signal); }
-.brandMark span { color: var(--signal); padding: 0 1px; }
+.brandMark { display: block; width: 39px; height: 39px; flex: none; object-fit: contain; }
 .brand strong, .brandCompact strong { display: block; font: 700 16px/1.15 "Iowan Old Style", Georgia, serif; letter-spacing: -.02em; }
 .brand small { display: block; margin-top: 5px; color: var(--text-muted); font-size: 10px; letter-spacing: .02em; }
 .railDivider { height: 1px; background: var(--border); margin: 29px 2px 22px; }
@@ -68,7 +67,7 @@
 .loading { padding: 50px 25px; color: var(--text-muted); font-size: 13px; }
 .loadingMark { color: var(--accent); font-size: 23px; margin-right: 8px; }
 .compact .topBar { height: 60px; padding: 0 16px; }
-.compact .brandMark { width: 31px; height: 31px; font-size: 11px; }
+.compact .brandMark { width: 31px; height: 31px; }
 .compact .brandCompact { gap: 9px; }
 .compact .appFooter { padding: 0 14px; font-size: 9px; }
 .compactNav { height: 47px; flex: none; display: flex; background: var(--surface-panel); border-bottom: 1px solid var(--border); }
